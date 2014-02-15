@@ -31,6 +31,7 @@ protected String latitude,longitude;
 protected boolean gps_enabled,network_enabled;
 private final double quarter_mile = 0.0035714285;
 MainActivity activity;
+
  
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -72,17 +73,16 @@ public void getRange(Location location) {
 
 //traverse cursor
 public void displaySongs(DBCursor cursor) {
-	
+	RelativeLayout rel = (RelativeLayout) findViewById(R.id.ListView01);
 	//makes a new text view for every song in the cursor
 	while(cursor.hasNext()) {
+		
 		TextView song = new TextView(this);
         song.setId((int)System.currentTimeMillis());
         LayoutParams lay = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-        lay.addRule(RelativeLayout.BELOW, recent.getId());
+        lay.addRule(RelativeLayout.BELOW, rel.getId());
         song.setText("Title: "+ cursor.next().get("song_title"));
-      
-      //  R.layout.get_songs_activity.addView(song, lay);
-        //recent = tv1;
+        rel.addView(song, lay);
 	}
 }
 
