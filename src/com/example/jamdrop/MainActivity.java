@@ -182,12 +182,29 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 //GameView game;
+	 DB db;
+	 DBCollection locationcoll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TextView welcome = (TextView) findViewById(R.id.welcome);
+        
+        
+        MongoClient mongoClient = null;
+    	try {
+    		mongoClient = new MongoClient( "potatohack" , 27017 );
+    	} catch (UnknownHostException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+        //make database stuff
+        db = mongoClient.getDB( "myDB" );
+        locationcoll = db.getCollection("locations_collection");
+       BasicDBObject doc = new BasicDBObject("song_title", "We Can't Stop").append("artist", "Bastille");
+
+        locationcoll.insert(doc);
     }
     
     public void onQuitButtonClick(View view) {
@@ -208,6 +225,12 @@ public class MainActivity extends Activity {
         return true;
     }
     
+public DB getDB() {
+	return db;
+}
 
+public DBCollection getLocationCollection() {
+	return locationcoll;
+}
 }
 //}
