@@ -11,13 +11,13 @@
     		android:text="Welcome!"/>
 
 		<Button android:id="@+id/getsong" 
-		 android:text="Get Songs"
+		 android:text="Get Songs opasdfasdf"
 		 android:layout_width="fill_parent"
 		 android:layout_height="wrap_content"
 		 android:onClick="onPlayButtonClick" />
 		
 		<Button android:id="@+id/dropsong" 
-		 android:text="Drop a Song"
+		 android:text="Drop asdfasdfl;kja Song"
 		 android:layout_width="fill_parent"
 		 android:layout_height="wrap_content" 
 		 android:onClick="onQuitButtonClick" />

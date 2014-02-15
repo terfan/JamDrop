@@ -1,99 +1,61 @@
 package com.example.jamdrop;
+import java.util.List;
 
-import java.util.Locale;
-
-import com.google.android.gms.common.GooglePlayServicesUtil;
-
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.FragmentTransaction;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.View;
-import android.view.ViewGroup;
+import android.app.Activity;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.widget.TextView;
-
-
-public class GetSongs extends Activity {
-	LocationHelper myLocationHelper;
-	float longitude;
-	float latitude;
-	
-	  @Override
-	    protected void onCreate(Bundle savedInstanceState) {
-		  super.onCreate(savedInstanceState);
-	        setContentView(R.layout.get_songs_activity);  
-	        myLocationHelper = new LocationHelper(this);
-			//launches the task that waits and gets location
-	        System.out.println(GooglePlayServicesUtil.isGooglePlayServicesAvailable(this));
-
-	        
-	        
-			LocationWorker locationTask = new LocationWorker();
-			locationTask .execute(new Boolean[] {true});
-	       // getLocation();
-	    }
-	
-	
-	//get user's location
-	public void getLocation() {
-		myLocationHelper = new LocationHelper(this);
-		//launches the task that waits and gets location
-		LocationWorker locationTask = new LocationWorker();
-		locationTask .execute(new Boolean[] {true});
-	}
-	
-	//get location songs
-	public void getSongsforLocation() {
-	
-	}
-	
-	//show songs
-	
-class LocationWorker extends AsyncTask<Boolean, Integer, Boolean> {
-    
-    @Override
-    protected void onPreExecute() {}       
-   
-    @Override
-    protected void onPostExecute(Boolean result) {
-
-		//gets lat/long
-		longitude = myLocationHelper.getLong();
-		latitude = myLocationHelper.getLat();
-		TextView testview = (TextView) findViewById(R.id.test);
-		testview.setText("other poopszz");
-		
-    }
-   
-    @Override
-    protected Boolean doInBackground(Boolean... params) {
-           
-            //while the location helper has not got a lock
-            while(myLocationHelper.gotLocation() == false){
-                    //do nothing, just wait
-            }
-            //once done return true
-            return true;
-    }
+import android.widget.Toast;
+ 
+import android.util.Log;
+ 
+public class GetSongs extends Activity implements LocationListener{
+protected LocationManager locationManager;
+protected LocationListener locationListener;
+protected Context context;
+TextView txtLat;
+String lat;
+String provider;
+protected String latitude,longitude; 
+protected boolean gps_enabled,network_enabled;
+ 
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.get_songs_activity);
+txtLat = (TextView) findViewById(R.id.test);
+//Toast.makeText(this, "HEEYGUUUUUUUUURLasdf;lkadjsf", Toast.LENGTH_LONG).show();
+locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+List<String> providers = locationManager.getProviders(true);
+locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+//Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+Location location = locationManager.getLastKnownLocation(providers.get(0));
+Toast.makeText(this, "lat: "+location.getLatitude(), Toast.LENGTH_LONG).show();
 }
 
 @Override
-public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.main, menu);
-    return true;
+public void onLocationChanged(Location location) {
+	Toast.makeText(this, "HEEYGUUUUUUUUURL whattttttttttttttttttttaaa", Toast.LENGTH_LONG).show();
+txtLat = (TextView) findViewById(R.id.test);
+txtLat.setText("Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+Toast.makeText(this, "lat: "+location.getLatitude(), Toast.LENGTH_LONG).show();
 }
-
-/*@Override
-protected void onResume() {
-	
-}*/
-
+ 
+@Override
+public void onProviderDisabled(String provider) {
+Log.d("Latitude","disable");
+}
+ 
+@Override
+public void onProviderEnabled(String provider) {
+Log.d("Latitude","enable");
+}
+ 
+@Override
+public void onStatusChanged(String provider, int status, Bundle extras) {
+Log.d("Latitude","status");
+}
 }
