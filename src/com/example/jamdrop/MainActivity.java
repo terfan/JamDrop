@@ -199,8 +199,6 @@ public class MainActivity extends Activity {
     	Intent i = new Intent(this, GetSongs.class);
     	startActivity(i);
     	
-    
-    	
     }
     
     @Override
