@@ -2,9 +2,6 @@ package com.example.jamdrop;
 
 import java.util.Locale;
 
-import com.example.jamdrop.MainActivity.DummySectionFragment;
-import com.example.jamdrop.MainActivity.SectionsPagerAdapter;
-
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -26,16 +23,19 @@ public class GetSongs extends Activity {
 	float longitude;
 	float latitude;
 	
-
+	  @Override
+	    protected void onCreate(Bundle savedInstanceState) {
+	        super.onCreate(savedInstanceState);
+	        setContentView(R.layout.get_songs_activity);  
+	    
+	    }
+	
+	
 	//get user's location
 	public void getLocation() {
 		//launches the task that waits and gets location
 		LocationWorker locationTask = new LocationWorker();
 		locationTask .execute(new Boolean[] {true});
-		
-		
-		
-		
 	}
 	
 	//get location songs
@@ -71,4 +71,12 @@ class LocationWorker extends AsyncTask<Boolean, Integer, Boolean> {
             return true;
     }
 }
+
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+    // Inflate the menu; this adds items to the action bar if it is present.
+    getMenuInflater().inflate(R.menu.main, menu);
+    return true;
+}
+
 }
