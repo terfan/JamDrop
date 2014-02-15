@@ -208,53 +208,6 @@ public class MainActivity extends Activity {
         return true;
     }
     
-/*class checkScore extends AsyncTask<String, Void, String> {
-		
-		protected void onPostExecute(String result) {
-				game.score++;
-				//change textview
-				System.out.println("changing score");
-				game.change_score = false;
-				TextView scoreboard = (TextView) findViewById(R.id.scoreboard);
-				if(scoreboard == null) System.out.println("SOME ISSUES");
-				else scoreboard.setText(String.valueOf(game.score));
-				
-				scoreboard.invalidate();
-				
-				//image disappears, sleeptime decreases, and x increment increases, reset x_pos
-				game.sleeptime = game.sleeptime - 3;
-				game.increment_x+=3;
-				game.x_pos = -150;
-	
-			
-		}*/
 
-		/*@Override
-		protected String doInBackground(String... params) {
-			System.out.println("scorescorescore");
-			while(true) {
-				if(game.change_score) return "scored";
-			}*/
-			
-		
-		
-
-		/*	try {
-				Thread.sleep(sleeptime); //wait 20ms
-			} catch (InterruptedException e) {
-				System.out.println("inerrupted exception");
-				e.printStackTrace();
-			} 
-		
-		
-		//x_pos+= increment_x; //move x coordinate 
-		//y_pos+= increment_y; //move y coordinate
-		
-		//call invalidate in post thing
-		return "did background";
-		}
-	*/	
-	//}
-    
 }
 //}

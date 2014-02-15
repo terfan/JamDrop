@@ -29,13 +29,14 @@ public class GetSongs extends Activity {
 	    protected void onCreate(Bundle savedInstanceState) {
 		  super.onCreate(savedInstanceState);
 	        setContentView(R.layout.get_songs_activity);  
-	        //myLocationHelper = new LocationHelper(this);
+	        myLocationHelper = new LocationHelper(this);
 			//launches the task that waits and gets location
 	        System.out.println(GooglePlayServicesUtil.isGooglePlayServicesAvailable(this));
+
 	        
 	        
-			//LocationWorker locationTask = new LocationWorker();
-			//locationTask .execute(new Boolean[] {true});
+			LocationWorker locationTask = new LocationWorker();
+			locationTask .execute(new Boolean[] {true});
 	       // getLocation();
 	    }
 	
@@ -67,7 +68,8 @@ class LocationWorker extends AsyncTask<Boolean, Integer, Boolean> {
 		longitude = myLocationHelper.getLong();
 		latitude = myLocationHelper.getLat();
 		TextView testview = (TextView) findViewById(R.id.test);
-		testview.setText(String.valueOf(myLocationHelper.getLat()) + " " + String.valueOf(longitude));
+		testview.setText("other poopszz");
+		
     }
    
     @Override
@@ -89,9 +91,9 @@ public boolean onCreateOptionsMenu(Menu menu) {
     return true;
 }
 
-@Override
+/*@Override
 protected void onResume() {
 	
-}
+}*/
 
 }
