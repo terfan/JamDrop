@@ -323,16 +323,16 @@ public class MainActivity extends FragmentActivity implements
 	}
 	
 	
-	public void testttt() {
+	public void test() {
 		
 	        MongoClient mongoClient = null;
 			try {
-				mongoClient = new MongoClient( "localhost" , 27017 );
+				mongoClient = new MongoClient( "potatohack" , 27017 );
 			} catch (UnknownHostException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-	        DB db = mongoClient.getDB( "testDB" );
+	        DB db = mongoClient.getDB( "location" );
 
 	        DBCollection coll = db.getCollection("testCollection");
 
