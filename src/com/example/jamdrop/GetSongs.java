@@ -1,18 +1,30 @@
 package com.example.jamdrop;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 
-public class GetSongs {
+
+public class GetSongs extends Activity {
+	LocationHelper myLocationHelper = new LocationHelper(this);
+	float longitude;
+	float latitude;
 	
 
 	//get user's location
 	public void getLocation() {
-		LocationHelper myLocationHelper = new LocationHelper(this);
+		//launches the task that waits and gets location
+		LocationWorker locationTask = new LocationWorker();
+		locationTask .execute(new Boolean[] {true});
+		longitude = myLocationHelper.getLong();
+		latitude = myLocationHelper.getLat();
+		
+		
+		
 	}
 	
 	//get location songs
 	public void getSongsforLocation() {
-		
+	
 	}
 	
 	//show songs
