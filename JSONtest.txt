@@ -1,0 +1,64 @@
+[
+    {
+    "coord_lat": "39.952171",
+    "coord_long": "-75.194089",
+    "song_ids": [0, 1]
+    },
+    
+    {
+    "coord_lat": "39.95045",
+    "coord_long": "-75.197809",
+    "song_ids": [1, 2, 3]
+    },
+    
+    {
+    "coord_lat": "39.953189",
+    "coord_long": "-75.202462",
+    "song_ids": [5, 3]
+    }
+    
+],
+[
+  {
+    "song_id" : 0,
+    "song_title": "We Are Young",
+    "artist": "Fun.",
+    "song_link": "https://soundcloud.com/grillmarketing/fun-we-are-young",
+    "cover_art": "https://i4.sndcdn.com/artworks-000038296801-3we60m-t500x500.jpg?435a760"
+  }, 
+  {
+    "song_id" : 1, 
+    "song_title": "Valentine - Paul Dateh remix",
+    "artist": "Kina Grannis",
+    "song_link": "https://soundcloud.com/pauldateh/kina-grannis-valentine-paul-dateh",
+    "cover_art": "https://i1.sndcdn.com/artworks-000040495806-p8fdzz-t500x500.jpg?435a760"  
+  },
+  {
+    "song_id" : 2, 
+    "song_title": "Pompeii",
+    "artist": "Bastille",
+    "song_link": "https://soundcloud.com/mmmusic/bastille-pompeii",
+    "cover_art": "https://i3.sndcdn.com/artworks-000058026396-68865u-t500x500.jpg?435a760"   
+  },
+  {
+    "song_id" : 3, 
+    "song_title": "Counting Stars",
+    "artist": "One Republic",
+    "song_link": "https://soundcloud.com/interscope/onerepublic-counting-stars",
+    "cover_art": "https://i2.sndcdn.com/artworks-000040814493-eu3kr3-t500x500.jpg?435a760"   
+  },
+  {
+    "song_id" : 4, 
+    "song_title": "Timber (feat. Ke$ha)",
+    "artist": "Pitbull",
+    "song_link": "https://soundcloud.com/pitbull/pitbull-timber-featuring-ke-ha",
+    "cover_art": "https://i3.sndcdn.com/artworks-000059542118-jpx08g-t500x500.jpg?435a760"   
+  },
+  {
+    "song_id" : 5, 
+    "song_title": "Royals",
+    "artist": "Lorde",
+    "song_link": "https://soundcloud.com/lordemusic/royals",
+    "cover_art": "https://i2.sndcdn.com/avatars-000026090656-utpgs7-t500x500.jpg?435a760"   
+  }
+]
