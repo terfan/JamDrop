@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -182,8 +183,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 //GameView game;
-	 DB db;
-	 DBCollection locationcoll;
+	 static DB db;
+	 static DBCollection locationcoll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,8 +192,11 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         TextView welcome = (TextView) findViewById(R.id.welcome);
         
+        AsyncTask background = new mongoThread();
+        //background.execute();
         
-        MongoClient mongoClient = null;
+        
+      /*  MongoClient mongoClient = null;
     	try {
     		mongoClient = new MongoClient( "potatohack" , 27017 );
     	} catch (UnknownHostException e) {
@@ -204,18 +208,18 @@ public class MainActivity extends Activity {
         locationcoll = db.getCollection("locations_collection");
        BasicDBObject doc = new BasicDBObject("song_title", "We Can't Stop").append("artist", "Bastille");
 
-        locationcoll.insert(doc);
+        locationcoll.insert(doc);*/
     }
     
-    public void onQuitButtonClick(View view) {
-    	finish();
-        System.exit(0);
+    public void onDropButtonClick(View view) {
+    	Intent i = new Intent(this, DropSong.class);
+    	startActivity(i);
     }
     
-    public void onPlayButtonClick(View view) {
+    public void onGetButtonClick(View view) {
+    	System.out.println("got over here");
     	Intent i = new Intent(this, GetSongs.class);
     	startActivity(i);
-    	
     }
     
     @Override
@@ -225,12 +229,42 @@ public class MainActivity extends Activity {
         return true;
     }
     
-public DB getDB() {
+public static DB getDB() {
 	return db;
 }
 
-public DBCollection getLocationCollection() {
+public static DBCollection getLocationCollection() {
 	return locationcoll;
+}
+
+class mongoThread extends AsyncTask<String, Void, String> {
+	
+	protected void onPostExecute(String result) {
+		
+		
+	}
+
+	@Override
+	protected String doInBackground(String... params) {
+	
+		 MongoClient mongoClient = null;
+    	try {
+    		mongoClient = new MongoClient( "potatohack" , 27017 );
+    	} catch (UnknownHostException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+        //make database stuff -- not working ...
+        db = mongoClient.getDB( "myDB" );
+       locationcoll = db.getCollection("locations_collection");
+       BasicDBObject doc = new BasicDBObject("song_title", "We Can't Stop").append("artist", "Bastille");
+
+       locationcoll.insert(doc);
+	
+	//call invalidate in post thing
+	return "did background";
+	}
+	
 }
 }
 //}

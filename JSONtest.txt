@@ -1,7 +1,7 @@
 [
     {
-    "coord_lat": "39.952171",
-    "coord_long": "-75.194089",
+    "latitude": "39.952171",
+    "longitude": "-75.194089",
     "song_ids": [0, 1]
     },
     

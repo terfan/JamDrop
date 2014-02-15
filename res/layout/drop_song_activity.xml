@@ -5,22 +5,20 @@
     android:orientation="vertical" >
     
 		<TextView
-		    android:id="@+id/welcome" 
+		    android:id="@+id/drop_song_welcome" 
     		android:layout_width="fill_parent"
     		android:layout_height="wrap_content"
-    		android:text="Welcome!"/>
+    		android:text="Type in a Song to Drop a Jam it At Your Location!"/>
 
-		<Button android:id="@+id/getsong" 
-		 android:text="Get Songs"
+		<EditText android:id="@+id/typesong" 
+		 android:text="Type in a Song"
 		 android:layout_width="fill_parent"
-		 android:layout_height="wrap_content"
-		 android:onClick="onGetButtonClick" />
+		 android:layout_height="wrap_content"/>
 		
-		<Button android:id="@+id/dropsong" 
-		 android:text="Drop a Song"
+		<Button android:id="@+id/submit" 
+		 android:text="Drop Your Jam!"
 		 android:layout_width="fill_parent"
 		 android:layout_height="wrap_content" 
-		 android:onClick="onDropButtonClick" />
+		 android:onClick="onEnterButtonClick" />
 			
-
 </LinearLayout>
