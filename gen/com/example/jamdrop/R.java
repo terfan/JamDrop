@@ -219,7 +219,8 @@ containing a value of this type.
         public static final int ic_plusone_small_off_client=0x7f02001a;
         public static final int ic_plusone_standard_off_client=0x7f02001b;
         public static final int ic_plusone_tall_off_client=0x7f02001c;
-        public static final int jamdroplogo=0x7f02001d;
+        public static final int jamdropicon=0x7f02001d;
+        public static final int jamdroplogo=0x7f02001e;
     }
     public static final class id {
         public static final int ListView01=0x7f05000d;
@@ -228,6 +229,7 @@ containing a value of this type.
         public static final int dropsong=0x7f050007;
         public static final int getsong=0x7f050006;
         public static final int hybrid=0x7f050004;
+        public static final int imageView1=0x7f050005;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
@@ -236,7 +238,6 @@ containing a value of this type.
         public static final int terrain=0x7f050003;
         public static final int test=0x7f05000c;
         public static final int typesong=0x7f050009;
-        public static final int welcome=0x7f050005;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;

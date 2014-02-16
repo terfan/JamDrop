@@ -192,22 +192,22 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TextView welcome = (TextView) findViewById(R.id.welcome);
+       // TextView welcome = (TextView) findViewById(R.id.welcome);
         
       //  AsyncTask background = new mongoThread();
         //background.execute();
         System.out.println("hello");
 		try {
 			MongoClient mongo = new MongoClient("162.243.97.194", 27017);
-			DB db = mongo.getDB("test");
-			DBCollection collection = db.getCollection("locations");
+			db = mongo.getDB("test");
+			locations = db.getCollection("locations");
 			System.out.println("Basic DB Object Ex:");
 			BasicDBObject document = new BasicDBObject();
 			document.put("latitude", 39);
 			document.put("longitude", -71);
 			
-			collection.insert(document);
-			DBCursor curse = collection.find();
+			locations.insert(document);
+			DBCursor curse = locations.find();
 			while (curse.hasNext()) {
 				System.out.println(curse.next());
 			}

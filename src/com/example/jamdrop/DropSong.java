@@ -48,7 +48,7 @@ DBCursor cursor;
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
-activity = (MainActivity) this.getParent();
+//activity = (MainActivity) this.getParent();
 setContentView(R.layout.drop_song_activity);
 //txtLat = (TextView) findViewById(R.id.test);
 
@@ -69,15 +69,15 @@ public void getRange(Location location) {
 	double min_long = location.getLongitude() - quarter_mile;
 	double max_lat = location.getLatitude() + quarter_mile;
 	double max_long = location.getLongitude()+ quarter_mile;
-	
-	db = activity.getDB();
-	locations = activity.getLocationCollection();
+	System.out.println("got location poop");
+	db = MainActivity.getDB();
+	locations = MainActivity.getLocationCollection();
 	
 	query = new BasicDBObject("latitude", new BasicDBObject("$gt", min_lat)).append("latitude", 
 			new BasicDBObject("$lt", max_lat)).append("longitude", new BasicDBObject("$gt", min_long)).append("longitude",
 					 new BasicDBObject("$lt", max_long));
-	
-	cursor = db.getCollection("locations_collection").find(query);
+	System.out.println("made query");
+	cursor = locations.find(query);
 	
 	
 	}
@@ -85,7 +85,7 @@ public void getRange(Location location) {
 public void onEnterButtonClick(View view) {
 	EditText edit = (EditText) this.findViewById(R.id.typesong);
 	Button b = (Button) this.findViewById(R.id.submit);
-	
+	System.out.println("got views");
 	String text = edit.getText().toString();
 	
 	System.out.println(text);
@@ -106,26 +106,39 @@ public void addSong(String song_title) {
         rel.addView(song, lay);
 	}*/
 	
-	//make a new song object
-	BasicDBObject document = new BasicDBObject();
-	document.put("song_title", song_title);
 	
+	BasicDBObject document = null;
 	//get song collection 
 	MongoClient mongo = null;
 	try {
 		mongo = new MongoClient("162.243.97.194", 27017);
+		db = mongo.getDB("test");
 		DBCollection songs = db.getCollection("songs");
-		songs.insert(document);
+		System.out.println("made client and collection poop");
+		
+		//make a new song object
+		document = new BasicDBObject();
+		document.put("song_title", song_title);
+		System.out.println("made song doc");
+		songs.insert(document); //it breaks here
+		System.out.println("inserted document");
+		
 		
 	} catch (UnknownHostException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
+	System.out.println("phewww");
+	BasicDBObject location = new BasicDBObject();
+	System.out.println("made location doc");
+	location.put("latitude", latitude);
+	location.put("longitude", longitude);
+	System.out.println("put lat/long");
+	location.put("songs", document.get("_id"));
+	System.out.println("got put id");
 	
 	//put this document's id into locations database
-	
-	
+	locations.insert(location);
 	
 }
 
