@@ -1,20 +1,20 @@
 [
     {
-    "latitude": "39.952171",
-    "longitude": "-75.194089",
-    "song_ids": [0, 1]
+    latitude: 39.952171,
+    longitude: -75.194089,
+    song_ids: [0, 1]
     },
     
     {
-    "coord_lat": "39.95045",
-    "coord_long": "-75.197809",
-    "song_ids": [1, 2, 3]
+    coord_lat: 39.95045,
+    coord_long: -75.197809,
+    song_ids: [1, 2, 3]
     },
     
     {
-    "coord_lat": "39.953189",
-    "coord_long": "-75.202462",
-    "song_ids": [5, 3]
+    coord_lat: 39.953189,
+    coord_long: -75.202462,
+    song_ids: [5, 3]
     }
     
 ],

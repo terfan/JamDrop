@@ -178,8 +178,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.view.Menu;
 import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RelativeLayout.LayoutParams;
 
 public class MainActivity extends Activity {
 //GameView game;
@@ -192,9 +194,29 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         TextView welcome = (TextView) findViewById(R.id.welcome);
         
-        AsyncTask background = new mongoThread();
+      //  AsyncTask background = new mongoThread();
         //background.execute();
-        
+        System.out.println("hello");
+		try {
+			MongoClient mongo = new MongoClient("162.243.97.194", 27017);
+			DB db = mongo.getDB("test");
+			DBCollection collection = db.getCollection("locations");
+			System.out.println("Basic DB Object Ex:");
+			BasicDBObject document = new BasicDBObject();
+			document.put("latitude", 39);
+			document.put("longitude", -71);
+			
+			collection.insert(document);
+			DBCursor curse = collection.find();
+			while (curse.hasNext()) {
+				System.out.println(curse.next());
+			}
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (MongoException e) {
+			e.printStackTrace();
+		}
+		
         
       /*  MongoClient mongoClient = null;
     	try {
@@ -246,8 +268,30 @@ class mongoThread extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected String doInBackground(String... params) {
-	
-		 MongoClient mongoClient = null;
+		System.out.println("hello");
+		try {
+			MongoClient mongo = new MongoClient("162.243.97.194", 27017);
+			DB db = mongo.getDB("test");
+			DBCollection collection = db.getCollection("locations");
+			System.out.println("Basic DB Object Ex:");
+			BasicDBObject document = new BasicDBObject();
+			document.put("latitude", 39);
+			document.put("longitude", -71);
+			
+			collection.insert(document);
+			DBCursor curse = collection.find();
+			while (curse.hasNext()) {
+				System.out.println(curse.next());
+			}
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		} catch (MongoException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		/* MongoClient mongoClient = null;
     	try {
     		mongoClient = new MongoClient( "potatohack" , 27017 );
     	} catch (UnknownHostException e) {
@@ -257,9 +301,17 @@ class mongoThread extends AsyncTask<String, Void, String> {
         //make database stuff -- not working ...
         db = mongoClient.getDB( "myDB" );
        locationcoll = db.getCollection("locations_collection");
-       BasicDBObject doc = new BasicDBObject("song_title", "We Can't Stop").append("artist", "Bastille");
+       /*BasicDBObject doc = new BasicDBObject("song_title", "We Can't Stop").append("artist", "Bastille");
 
        locationcoll.insert(doc);
+       BasicDBObject location1 = new BasicDBObject("latitude", 39.0001).append("longitude", 71.2222);
+       locationcoll.insert(location1);
+       
+       DBCursor cursor = (DBCursor) locationcoll.findOne();
+       
+       while(cursor.hasNext()) {	
+   		System.out.println(cursor.next().get("latitude"));
+   	}*/
 	
 	//call invalidate in post thing
 	return "did background";

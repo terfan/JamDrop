@@ -8,10 +8,9 @@
 		    android:id="@+id/drop_song_welcome" 
     		android:layout_width="fill_parent"
     		android:layout_height="wrap_content"
-    		android:text="Type in a Song to Drop a Jam it At Your Location!"/>
+    		android:text="Type in a Song to Drop a Jam At Your Location!"/>
 
 		<EditText android:id="@+id/typesong" 
-		 android:text="Type in a Song"
 		 android:layout_width="fill_parent"
 		 android:layout_height="wrap_content"/>
 		

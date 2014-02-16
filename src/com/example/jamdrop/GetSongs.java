@@ -55,7 +55,7 @@ System.out.println("got here too876076o");
 Location location = locationManager.getLastKnownLocation(providers.get(0));
 System.out.println("got here tgfhdsoo");
 Toast.makeText(this, "lat: "+ String.valueOf(location.getLatitude()), Toast.LENGTH_LONG).show();
-Toast.makeText(this, "lat: "+ String.valueOf(location.getLongitude()), Toast.LENGTH_LONG).show();
+Toast.makeText(this, "long: "+ String.valueOf(location.getLongitude()), Toast.LENGTH_LONG).show();
 System.out.println("got here yup it's done");
 }
 

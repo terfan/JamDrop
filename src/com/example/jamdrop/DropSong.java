@@ -14,6 +14,7 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -36,6 +37,10 @@ protected double longitude;
 protected boolean gps_enabled,network_enabled;
 private final double quarter_mile = 0.0035714285;
 MainActivity activity;
+DB db;
+DBCollection locations;
+BasicDBObject query;
+DBCursor cursor;
 
  
 @Override
@@ -43,14 +48,16 @@ protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
 activity = (MainActivity) this.getParent();
 setContentView(R.layout.drop_song_activity);
-txtLat = (TextView) findViewById(R.id.test);
+//txtLat = (TextView) findViewById(R.id.test);
 
 locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 List<String> providers = locationManager.getProviders(true);
 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-
 Location location = locationManager.getLastKnownLocation(providers.get(0));
-Toast.makeText(this, "lat: "+location.getLatitude(), Toast.LENGTH_LONG).show();
+//Toast.makeText(this, "lat: "+location.getLatitude(), Toast.LENGTH_LONG).show();
+
+getRange(location);
+
 }
 
 
@@ -61,32 +68,44 @@ public void getRange(Location location) {
 	double max_lat = location.getLatitude() + quarter_mile;
 	double max_long = location.getLongitude()+ quarter_mile;
 	
-	DB db = activity.getDB();
-	DBCollection locationcoll = activity.getLocationCollection();
+	db = activity.getDB();
+	locations = activity.getLocationCollection();
 	
-	BasicDBObject query = new BasicDBObject("latitude", new BasicDBObject("$gt", min_lat)).append("latitude", 
+	/*query = new BasicDBObject("latitude", new BasicDBObject("$gt", min_lat)).append("latitude", 
 			new BasicDBObject("$lt", max_lat)).append("longitude", new BasicDBObject("$gt", min_long)).append("longitude",
 					 new BasicDBObject("$lt", max_long));
+	
+	cursor = db.getCollection("locations_collection").find(query);		*/
+	
+	
 	}
 
-public void onEnterButtonClick() {
+public void onEnterButtonClick(View view) {
 	EditText edit = (EditText) this.findViewById(R.id.typesong);
 	Button b = (Button) this.findViewById(R.id.submit);
+	
+	String text = edit.getText().toString();
+	
+	System.out.println(text);
+	addSong(text);
 }
 
 //traverse cursor
-public void addSong(DBCursor cursor) {
-	RelativeLayout rel = (RelativeLayout) findViewById(R.id.ListView01);
+public void addSong(String song_title) {
+	/*RelativeLayout rel = (RelativeLayout) findViewById(R.id.ListView01);
 	//makes a new text view for every song in the cursor
+	
 	while(cursor.hasNext()) {
-		
 		TextView song = new TextView(this);
-        song.setId((int)System.currentTimeMillis());
+        //song.setId((int)System.currentTimeMillis());
         LayoutParams lay = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
         lay.addRule(RelativeLayout.BELOW, rel.getId());
         song.setText("Title: "+ cursor.next().get("song_title"));
         rel.addView(song, lay);
-	}
+	}*/
+	
+	
+	
 }
 
 
