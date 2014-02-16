@@ -196,11 +196,25 @@ public class MainActivity extends Activity {
         
       //  AsyncTask background = new mongoThread();
         //background.execute();
-        System.out.println("hello");
+        System.out.println("hello1");
 		try {
-			MongoClient mongo = new MongoClient("162.243.97.194", 27017);
-			db = mongo.getDB("test");
-			locations = db.getCollection("locations");
+			//MongoClient mongo = new MongoClient("troup.mongohq.com", 10067);
+			//char[] pw = {'j','a','m','d','r','o','p'};
+			String uri = "potato:jamdrop@troup.mongohq.com:10067/potato";
+			 System.out.println("hello2");
+			 MongoClientURI mongoClientURI=new MongoClientURI(uri);
+			 System.out.println("hello3");
+	         MongoClient mongoClient=new MongoClient(mongoClientURI);
+	         System.out.println("hello4");
+	           DB db=mongoClient.getDB(mongoClientURI.getDatabase());
+	           System.out.println("hello5");
+	           db.authenticate(mongoClientURI.getUsername(), mongoClientURI.getPassword());
+	           System.out.println("hello6");
+			//DB db = mongo.getDB("potato");
+			//boolean auth = db.authenticate("potato", pw);
+			//System.out.println(auth);
+			
+	         locations = db.getCollection("locations");
 			System.out.println("Basic DB Object Ex:");
 			BasicDBObject document = new BasicDBObject();
 			document.put("latitude", 39);

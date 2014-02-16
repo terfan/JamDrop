@@ -111,8 +111,12 @@ public void addSong(String song_title) {
 	//get song collection 
 	MongoClient mongo = null;
 	try {
-		mongo = new MongoClient("162.243.97.194", 27017);
-		db = mongo.getDB("test");
+		
+		mongo = new MongoClient("troup.mongohq.com", 10067);
+		db = mongo.getDB("potato");
+		char[] pw = {'j','a','m','d','r','o','p'};
+		boolean auth = db.authenticate("potato", pw);
+		
 		DBCollection songs = db.getCollection("songs");
 		System.out.println("made client and collection poop");
 		
