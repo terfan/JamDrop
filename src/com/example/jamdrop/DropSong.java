@@ -114,16 +114,19 @@ public void addSong(String song_title) {
 	MongoClient mongo = null;
 	try {
 		mongo = new MongoClient("162.243.97.194", 27017);
+		DBCollection songs = db.getCollection("songs");
+		songs.insert(document);
+		
 	} catch (UnknownHostException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	DB db = mongo.getDB("test");
-	DBCollection collection = db.getCollection("locations");
+	
 	
 	//put this document's id into locations database
 	
-	locations.insert(document);
+	
+	
 }
 
 
