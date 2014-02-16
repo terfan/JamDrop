@@ -2,25 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#c31879"
     android:orientation="vertical" >
-    
-		<TextView
-		    android:id="@+id/welcome" 
-    		android:layout_width="fill_parent"
-    		android:layout_height="wrap_content"
-    		android:text="Welcome!"/>
 
-		<Button android:id="@+id/getsong" 
-		 android:text="Get Songs"
-		 android:layout_width="fill_parent"
-		 android:layout_height="wrap_content"
-		 android:onClick="onGetButtonClick" />
-		
-		<Button android:id="@+id/dropsong" 
-		 android:text="Drop a Song"
-		 android:layout_width="fill_parent"
-		 android:layout_height="wrap_content" 
-		 android:onClick="onDropButtonClick" />
-			
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart"
+        android:src="@drawable/jamdroplogo" />
+
+    <Button
+        android:id="@+id/getsong"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onGetButtonClick"
+        android:text="Get Songs" />
+
+    <Button
+        android:id="@+id/dropsong"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onDropButtonClick"
+        android:text="Drop a Song" />
 
 </LinearLayout>
