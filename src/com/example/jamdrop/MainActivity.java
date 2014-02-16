@@ -186,7 +186,7 @@ import android.widget.RelativeLayout.LayoutParams;
 public class MainActivity extends Activity {
 //GameView game;
 	 static DB db;
-	 static DBCollection locationcoll;
+	 static DBCollection locations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -256,7 +256,7 @@ public static DB getDB() {
 }
 
 public static DBCollection getLocationCollection() {
-	return locationcoll;
+	return locations;
 }
 
 class mongoThread extends AsyncTask<String, Void, String> {
@@ -272,14 +272,14 @@ class mongoThread extends AsyncTask<String, Void, String> {
 		try {
 			MongoClient mongo = new MongoClient("162.243.97.194", 27017);
 			DB db = mongo.getDB("test");
-			DBCollection collection = db.getCollection("locations");
+			locations = db.getCollection("locations");
 			System.out.println("Basic DB Object Ex:");
 			BasicDBObject document = new BasicDBObject();
 			document.put("latitude", 39);
 			document.put("longitude", -71);
 			
-			collection.insert(document);
-			DBCursor curse = collection.find();
+			locations.insert(document);
+			DBCursor curse = locations.find();
 			while (curse.hasNext()) {
 				System.out.println(curse.next());
 			}

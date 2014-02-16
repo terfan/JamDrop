@@ -1,12 +1,14 @@
 package com.example.jamdrop;
 
 
+import java.net.UnknownHostException;
 import java.util.List;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
+import com.mongodb.MongoClient;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -104,8 +106,24 @@ public void addSong(String song_title) {
         rel.addView(song, lay);
 	}*/
 	
+	//make a new song object
+	BasicDBObject document = new BasicDBObject();
+	document.put("song_title", song_title);
 	
+	//get song collection 
+	MongoClient mongo = null;
+	try {
+		mongo = new MongoClient("162.243.97.194", 27017);
+	} catch (UnknownHostException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	DB db = mongo.getDB("test");
+	DBCollection collection = db.getCollection("locations");
 	
+	//put this document's id into locations database
+	
+	locations.insert(document);
 }
 
 
