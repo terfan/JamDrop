@@ -73,11 +73,11 @@ public void getRange(Location location) {
 	db = activity.getDB();
 	locations = activity.getLocationCollection();
 	
-	/*query = new BasicDBObject("latitude", new BasicDBObject("$gt", min_lat)).append("latitude", 
+	query = new BasicDBObject("latitude", new BasicDBObject("$gt", min_lat)).append("latitude", 
 			new BasicDBObject("$lt", max_lat)).append("longitude", new BasicDBObject("$gt", min_long)).append("longitude",
 					 new BasicDBObject("$lt", max_long));
 	
-	cursor = db.getCollection("locations_collection").find(query);		*/
+	cursor = db.getCollection("locations_collection").find(query);
 	
 	
 	}
