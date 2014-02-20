@@ -105,8 +105,7 @@ public void onEnterButtonClick(View view) {
 	song_title = text;
 	
 	DropSongServer drop = new DropSongServer(text, location);
-//	new dropSong().execute("executing");
-	//addSong(text);
+
 }
 
 //traverse cursor
