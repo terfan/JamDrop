@@ -315,7 +315,7 @@ class mongoThread extends AsyncTask<String, Void, String> {
 		document.put("longitude", -71);
 		
 		locations.insert(document);
-		DBCursor curse = locations.find();
+		//DBCursor curse = locations.find();
 	
 		mongoClient.close();
 	
