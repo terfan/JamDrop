@@ -91,7 +91,9 @@ System.out.println("getting range");
 	System.out.println("made query");
 	cursor = locations.find(query);
 	System.out.println("made query2");
+	
 	}
+
 
 public void onEnterButtonClick(View view) {
 	EditText edit = (EditText) this.findViewById(R.id.typesong);
@@ -102,7 +104,8 @@ public void onEnterButtonClick(View view) {
 	System.out.println(text);
 	song_title = text;
 	
-	new dropSong().execute("executing");
+	DropSongServer drop = new DropSongServer(text, location);
+//	new dropSong().execute("executing");
 	//addSong(text);
 }
 
