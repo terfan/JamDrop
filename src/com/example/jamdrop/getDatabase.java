@@ -37,7 +37,7 @@ public class getDatabase {
 	class mongoThread extends AsyncTask<String, Void, String> {
 		
 		protected void onPostExecute(String result) {
-			
+			System.out.println("DONE!!!!");
 		}
 
 		@Override
@@ -65,6 +65,8 @@ public class getDatabase {
 			
 	         locations = db.getCollection("locations");
 	         songs = db.getCollection("songs");
+	         System.out.println("initialized locationssss");
+	         if (locations == null) System.out.println("null here too :(");
 			//System.out.println("Basic DB Object Ex:");
 			//BasicDBObject document = new BasicDBObject();
 			//document.put("latitude", 39);

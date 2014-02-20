@@ -192,6 +192,7 @@ public class MainActivity extends Activity {
 //GameView game;
 	 static DB db;
 	 static DBCollection locations;
+	 getDatabase data;
 
     @SuppressLint("NewApi")
 	@Override
@@ -201,7 +202,7 @@ public class MainActivity extends Activity {
         //AsyncTask database = new mongoThread();
         //database.execute("poop");
         
-        //getDatabase data = new getDatabase();
+     //   data = new getDatabase();
         
         
         
@@ -247,6 +248,10 @@ public class MainActivity extends Activity {
     	
     	Intent i = new Intent(this, DropSong.class);
     	startActivity(i);
+    }
+    
+    public DB getDB2() {
+    	return data.getDB();
     }
     
     public void onGetButtonClick(View view) {
