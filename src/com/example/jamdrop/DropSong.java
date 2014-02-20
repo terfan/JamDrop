@@ -38,24 +38,27 @@ double latitude;
 protected double longitude; 
 protected boolean gps_enabled,network_enabled;
 private final double quarter_mile = 0.0035714285;
-MainActivity activity;
+//MainActivity activity;
 DB db;
 DBCollection locations;
+DBCollection songs;
 BasicDBObject query;
 DBCursor cursor;
 
  
 @Override
 protected void onCreate(Bundle savedInstanceState) {
+	System.out.println("creating");
 super.onCreate(savedInstanceState);
 //activity = (MainActivity) this.getParent();
 setContentView(R.layout.drop_song_activity);
 //txtLat = (TextView) findViewById(R.id.test);
-
+System.out.println("here");
 locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 List<String> providers = locationManager.getProviders(true);
 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
 Location location = locationManager.getLastKnownLocation(providers.get(0));
+System.out.println("end of on create almost");
 //Toast.makeText(this, "lat: "+location.getLatitude(), Toast.LENGTH_LONG).show();
 
 getRange(location);
@@ -64,20 +67,25 @@ getRange(location);
 
 
 public void getRange(Location location) {
-
+System.out.println("getting range");
 	double min_lat = location.getLatitude() - quarter_mile;
 	double min_long = location.getLongitude() - quarter_mile;
 	double max_lat = location.getLatitude() + quarter_mile;
 	double max_long = location.getLongitude()+ quarter_mile;
 	System.out.println("got location poop");
-	db = MainActivity.getDB();
-	locations = MainActivity.getLocationCollection();
+	getDatabase data = new getDatabase();
+	
+	locations = data.getLocationCollection();
+	songs = data.getSongsCollection();
+	System.out.println("got databases");
 	
 	query = new BasicDBObject("latitude", new BasicDBObject("$gt", min_lat)).append("latitude", 
 			new BasicDBObject("$lt", max_lat)).append("longitude", new BasicDBObject("$gt", min_long)).append("longitude",
 					 new BasicDBObject("$lt", max_long));
+	
 	System.out.println("made query");
 	cursor = locations.find(query);
+	System.out.println("made query2");
 	
 	
 	}
@@ -107,38 +115,22 @@ public void addSong(String song_title) {
 	}*/
 	
 	
-	BasicDBObject document = null;
-	//get song collection 
-	MongoClient mongo = null;
-	try {
-		
-		mongo = new MongoClient("troup.mongohq.com", 10067);
-		db = mongo.getDB("potato");
-		char[] pw = {'j','a','m','d','r','o','p'};
-		boolean auth = db.authenticate("potato", pw);
-		
-		DBCollection songs = db.getCollection("songs");
-		System.out.println("made client and collection poop");
+	
 		
 		//make a new song object
-		document = new BasicDBObject();
-		document.put("song_title", song_title);
+		BasicDBObject song = new BasicDBObject();
+		song.put("song_title", song_title);
 		System.out.println("made song doc");
-		songs.insert(document); //it breaks here
+		songs.insert(song); //it breaks here
 		System.out.println("inserted document");
-		
-		
-	} catch (UnknownHostException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
 	System.out.println("phewww");
+	
 	BasicDBObject location = new BasicDBObject();
 	System.out.println("made location doc");
 	location.put("latitude", latitude);
 	location.put("longitude", longitude);
 	System.out.println("put lat/long");
-	location.put("songs", document.get("_id"));
+	location.put("songs", song.get("_id")); //is this right?
 	System.out.println("got put id");
 	
 	//put this document's id into locations database

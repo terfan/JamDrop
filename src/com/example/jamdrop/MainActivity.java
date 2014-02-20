@@ -1,12 +1,17 @@
 package com.example.jamdrop;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.Locale;
+import java.util.Set;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -188,31 +193,45 @@ public class MainActivity extends Activity {
 	 static DB db;
 	 static DBCollection locations;
 
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //AsyncTask database = new mongoThread();
+        //database.execute("poop");
+        
+        //getDatabase data = new getDatabase();
+        
+        
+        
+       
+	
        // TextView welcome = (TextView) findViewById(R.id.welcome);
         
-      //  AsyncTask background = new mongoThread();
-        //background.execute();
-        System.out.println("hello1");
-		try {
-			//MongoClient mongo = new MongoClient("troup.mongohq.com", 10067);
-			//char[] pw = {'j','a','m','d','r','o','p'};
-			String uri = "potato:jamdrop@troup.mongohq.com:10067/potato";
-			 System.out.println("hello2");
-			 MongoClientURI mongoClientURI=new MongoClientURI(uri);
-			 System.out.println("hello3");
-	         MongoClient mongoClient=new MongoClient(mongoClientURI);
-	         System.out.println("hello4");
-	           DB db=mongoClient.getDB(mongoClientURI.getDatabase());
-	           System.out.println("hello5");
-	           db.authenticate(mongoClientURI.getUsername(), mongoClientURI.getPassword());
-	           System.out.println("hello6");
-			//DB db = mongo.getDB("potato");
-			//boolean auth = db.authenticate("potato", pw);
-			//System.out.println(auth);
+       // StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        //StrictMode.setThreadPolicy(policy);
+      
+      /*  System.out.println("hello1");
+			String uri = "mongodb://potato:poop@troup.mongohq.com:10003/jamdrop";
+			System.out.println("hello2");
+			MongoClientURI mongoClientURI=new MongoClientURI(uri); //it crashes here
+			System.out.println("hello3");
+			MongoClient mongoClient = null;
+			System.out.println("hello4");
+			try {
+				mongoClient = new MongoClient(mongoClientURI); //now it crashes here
+				System.out.println("hello5");
+			} catch (UnknownHostException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("hello6");
+			DB db=mongoClient.getDB(mongoClientURI.getDatabase());
+			System.out.println("hello7");
+			db.authenticate(mongoClientURI.getUsername(), mongoClientURI.getPassword());
+			System.out.println("hello8");
+			
 			
 	         locations = db.getCollection("locations");
 			System.out.println("Basic DB Object Ex:");
@@ -221,38 +240,17 @@ public class MainActivity extends Activity {
 			document.put("longitude", -71);
 			
 			locations.insert(document);
-			DBCursor curse = locations.find();
-			while (curse.hasNext()) {
-				System.out.println(curse.next());
-			}
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (MongoException e) {
-			e.printStackTrace();
-		}
-		
-        
-      /*  MongoClient mongoClient = null;
-    	try {
-    		mongoClient = new MongoClient( "potatohack" , 27017 );
-    	} catch (UnknownHostException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-        //make database stuff
-        db = mongoClient.getDB( "myDB" );
-        locationcoll = db.getCollection("locations_collection");
-       BasicDBObject doc = new BasicDBObject("song_title", "We Can't Stop").append("artist", "Bastille");
-
-        locationcoll.insert(doc);*/
+			DBCursor curse = locations.find();*/
     }
     
     public void onDropButtonClick(View view) {
+    	
     	Intent i = new Intent(this, DropSong.class);
     	startActivity(i);
     }
     
     public void onGetButtonClick(View view) {
+    	
     	System.out.println("got over here");
     	Intent i = new Intent(this, GetSongs.class);
     	startActivity(i);
@@ -266,10 +264,12 @@ public class MainActivity extends Activity {
     }
     
 public static DB getDB() {
+    
 	return db;
 }
 
 public static DBCollection getLocationCollection() {
+  
 	return locations;
 }
 
@@ -282,55 +282,41 @@ class mongoThread extends AsyncTask<String, Void, String> {
 
 	@Override
 	protected String doInBackground(String... params) {
-		System.out.println("hello");
+		System.out.println("hello1");
+		String uri = "mongodb://potato:poop@troup.mongohq.com:10003/jamdrop";
+		System.out.println("hello2");
+		MongoClientURI mongoClientURI=new MongoClientURI(uri); //it crashes here
+		System.out.println("hello3");
+		MongoClient mongoClient = null;
+		System.out.println("hello4");
 		try {
-			MongoClient mongo = new MongoClient("162.243.97.194", 27017);
-			DB db = mongo.getDB("test");
-			locations = db.getCollection("locations");
-			System.out.println("Basic DB Object Ex:");
-			BasicDBObject document = new BasicDBObject();
-			document.put("latitude", 39);
-			document.put("longitude", -71);
-			
-			locations.insert(document);
-			DBCursor curse = locations.find();
-			while (curse.hasNext()) {
-				System.out.println(curse.next());
-			}
+			mongoClient = new MongoClient(mongoClientURI); //now it crashes here
+			System.out.println("hello5");
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		} catch (MongoException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("hello6");
+		DB db=mongoClient.getDB(mongoClientURI.getDatabase());
+		System.out.println("hello7");
+		db.authenticate(mongoClientURI.getUsername(), mongoClientURI.getPassword());
+		System.out.println("hello8");
 		
 		
+         locations = db.getCollection("locations");
+		System.out.println("Basic DB Object Ex:");
+		BasicDBObject document = new BasicDBObject();
+		document.put("latitude", 39);
+		document.put("longitude", -71);
 		
-		/* MongoClient mongoClient = null;
-    	try {
-    		mongoClient = new MongoClient( "potatohack" , 27017 );
-    	} catch (UnknownHostException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-        //make database stuff -- not working ...
-        db = mongoClient.getDB( "myDB" );
-       locationcoll = db.getCollection("locations_collection");
-       /*BasicDBObject doc = new BasicDBObject("song_title", "We Can't Stop").append("artist", "Bastille");
-
-       locationcoll.insert(doc);
-       BasicDBObject location1 = new BasicDBObject("latitude", 39.0001).append("longitude", 71.2222);
-       locationcoll.insert(location1);
-       
-       DBCursor cursor = (DBCursor) locationcoll.findOne();
-       
-       while(cursor.hasNext()) {	
-   		System.out.println(cursor.next().get("latitude"));
-   	}*/
+		locations.insert(document);
+		DBCursor curse = locations.find();
+	
+		mongoClient.close();
 	
 	//call invalidate in post thing
 	return "did background";
+		
 	}
-	
 }
 }
-//}
